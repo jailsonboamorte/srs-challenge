@@ -1,0 +1,21 @@
+FROM python:3.12
+
+
+WORKDIR /app
+
+# CODE
+COPY --from=root ./pyproject.toml .
+
+ENV PYTHONPATH=/app
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# PYTHON ENV
+RUN apt-get update && apt-get install -y --no-install-recommends libpq-dev gcc curl && rm -rf /var/lib/apt/lists/*
+RUN pip install --upgrade pip==24.2 --no-cache-dir
+RUN pip3 install poetry==1.8.3 --no-cache-dir
+RUN poetry config virtualenvs.create false
+RUN poetry install --no-interaction --no-ansi
+
+COPY --from=root ./app /app
+
+CMD ["uvicorn", "main:api", "--host", "0.0.0.0", "--reload"]

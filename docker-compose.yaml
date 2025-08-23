@@ -1,0 +1,45 @@
+services:
+  serasa-service-api:
+    build:      
+      context: ./docker
+      additional_contexts:
+        root: .
+      dockerfile: ./Dockerfile-local
+    ports:
+      - "8088:8000"
+    container_name: ${APP_CONTAINER_NAME}
+    environment:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY     
+      - AWS_REGION 
+      - ENV
+      - POSTGRES_HOST
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      
+      
+    volumes:
+      - ./app:/app      
+    restart: always    
+    depends_on:
+      serasa-service-db:
+        condition: service_healthy          
+  serasa-service-db:
+    image: postgres:15-alpine
+    restart: always
+    container_name: ${DATABASE_CONTAINER_NAME}
+    
+    environment:
+      - POSTGRES_INITDB_ARGS      
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydatabase"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
