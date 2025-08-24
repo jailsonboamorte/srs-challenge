@@ -29,7 +29,7 @@ class Base(DeclarativeBase):
     )
 
 
-class ModelStatusEnum(enum.Enum):
+class ModelCropsStatusEnum(enum.Enum):
     canceled = "canceled"
     finished = "finished"
     started = "started"
@@ -40,69 +40,9 @@ class ModelProducersStatusEnum(enum.Enum):
     inactive = "inactive"
 
 
-class ModelStateEnum(enum.Enum):
-    AC = "Acre"
-    AL = "Alagoas"
-    AP = "Amapá"
-    AM = "Amazonas"
-    BA = "Bahia"
-    CE = "Ceará"
-    DF = "Distrito Federal"
-    ES = "Espírito Santo"
-    GO = "Goiás"
-    MA = "Maranhão"
-    MT = "Mato Grosso"
-    MS = "Mato Grosso do Sul"
-    MG = "Minas Gerais"
-    PA = "Pará"
-    PB = "Paraíba"
-    PR = "Paraná"
-    PE = "Pernambuco"
-    PI = "Piauí"
-    RJ = "Rio de Janeiro"
-    RN = "Rio Grande do Norte"
-    RS = "Rio Grande do Sul"
-    RO = "Rondônia"
-    RR = "Roraima"
-    SC = "Santa Catarina"
-    SP = "São Paulo"
-    SE = "Sergipe"
-    TO = "Tocantins"
-
-
-class ModelCityEnum(enum.Enum):
-    RIO_BRANCO = "Rio Branco"  # AC
-    MACEIO = "Maceió"  # AL
-    MACAPA = "Macapá"  # AP
-    MANAUS = "Manaus"  # AM
-    SALVADOR = "Salvador"  # BA
-    FORTALEZA = "Fortaleza"  # CE
-    BRASILIA = "Brasília"  # DF
-    VITORIA = "Vitória"  # ES
-    GOIANIA = "Goiânia"  # GO
-    SAO_LUIS = "São Luís"  # MA
-    CUIABA = "Cuiabá"  # MT
-    CAMPO_GRANDE = "Campo Grande"  # MS
-    BELO_HORIZONTE = "Belo Horizonte"  # MG
-    BELEM = "Belém"  # PA
-    JOAO_PESSOA = "João Pessoa"  # PB
-    CURITIBA = "Curitiba"  # PR
-    RECIFE = "Recife"  # PE
-    TERESINA = "Teresina"  # PI
-    RIO_DE_JANEIRO = "Rio de Janeiro"  # RJ
-    NATAL = "Natal"  # RN
-    PORTO_ALEGRE = "Porto Alegre"  # RS
-    PORTO_VELHO = "Porto Velho"  # RO
-    BOA_VISTA = "Boa Vista"  # RR
-    FLORIANOPOLIS = "Florianópolis"  # SC
-    SAO_PAULO = "São Paulo"  # SP
-    ARACAJU = "Aracaju"  # SE
-    PALMAS = "Palmas"  # TO
-
-
 class Producers(Base):
     __tablename__ = "producers"
-    __table_args__ = (UniqueConstraint("cpf", name="unique_code_idx"),)
+    __table_args__ = (UniqueConstraint("code", name="unique_code_idx"),)
 
     code = Column(String(20), nullable=False)
     status = Column(
@@ -131,8 +71,8 @@ class Companies(Base):
 class Addresses(Base):
     __tablename__ = "addresses"
 
-    state = Column(Enum(ModelStateEnum), nullable=False)
-    city = Column(Enum(ModelCityEnum), nullable=False)
+    state = Column(String(20), nullable=False)
+    city = Column(String(20), nullable=False)
     zip_code = Column(String(15), nullable=False)
 
 
@@ -187,7 +127,7 @@ class Crops(Base):
     farm_id = Column(Integer, ForeignKey("farms.id"), nullable=False)
     harvest_id = Column(Integer, ForeignKey("harvests.id"), nullable=False)
     arabel_area = Column(Integer, nullable=False, comment="Área agricultável")
-    status = Column(Enum(ModelStatusEnum), nullable=False)
+    status = Column(Enum(ModelCropsStatusEnum), nullable=False)
 
 
 # op.execute('DROP TYPE IF EXISTS modelcategoryenum;')
