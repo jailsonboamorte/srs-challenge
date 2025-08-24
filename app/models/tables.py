@@ -6,7 +6,6 @@ from sqlalchemy import (
     ForeignKey,
     Integer,
     String,
-    text,
     TIMESTAMP,
     UniqueConstraint,
     func,
@@ -44,7 +43,7 @@ class Producers(Base):
     __tablename__ = "producers"
     __table_args__ = (UniqueConstraint("code", name="unique_code_idx"),)
 
-    code = Column(String(20), nullable=False)
+    code = Column(String(100), nullable=False)
     status = Column(
         Enum(ModelProducersStatusEnum), nullable=False, server_default="active"
     )

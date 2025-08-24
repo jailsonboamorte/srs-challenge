@@ -42,7 +42,7 @@ def upgrade() -> None:
     op.execute('DROP TYPE IF EXISTS modelproducersstatusenum;')
     op.create_table('producers',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('code', sa.String(length=20), nullable=False),
+    sa.Column('code', sa.String(length=100), nullable=False),
     sa.Column('status', sa.Enum('active', 'inactive', name='modelproducersstatusenum'), server_default='active', nullable=False),
     sa.Column('created_at', sa.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(), nullable=True),

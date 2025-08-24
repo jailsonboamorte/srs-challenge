@@ -1,10 +1,9 @@
-from sqlalchemy import text  # type: ignore
 from sqlalchemy.orm import Session
 
 from helpers.exception import get_last_call
 from log import logger
 from models.db import DB
-from models.tables import Base, Users
+from models.tables import Base
 
 db = DB.create()
 
@@ -18,7 +17,7 @@ class Model:
         else:
             self.session = db.get_session()
 
-    def get(self, table: Base, id: int) -> Users | None:
+    def get(self, table: Base, id: int) -> Base | None:
         try:
             if id is None:
                 return None
@@ -33,7 +32,7 @@ class Model:
             )
             return None
 
-    def get_by_producer_id(self, table: Base, producer_id: int) -> Users | None:
+    def get_by_producer_id(self, table: Base, producer_id: int) -> Base | None:
         try:
             if id is None:
                 return None

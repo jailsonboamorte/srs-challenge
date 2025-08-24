@@ -13,9 +13,12 @@ class HarvestsModel(Model):
         try:
             object = self.get(Harvests, data.get("id"))
             if object is None:
-                object = Harvests(name=data.get("name"))
+                object = Harvests(
+                    name=data.get("name"), description=data.get("description")
+                )
 
             object.name = data.get("name")
+            object.description = data.get("description")
 
             self.session.add(object)
             self.session.flush()
