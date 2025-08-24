@@ -35,9 +35,9 @@ class ModelStatusEnum(enum.Enum):
     started = "started"
 
 
-class ModelCategoryEnum(enum.Enum):
-    national = "national"
-    international = "international"
+class ModelProducersStatusEnum(enum.Enum):
+    active = "active"
+    inactive = "inactive"
 
 
 class ModelStateEnum(enum.Enum):
@@ -102,8 +102,11 @@ class ModelCityEnum(enum.Enum):
 
 class Producers(Base):
     __tablename__ = "producers"
-    category = Column(
-        Enum(ModelCategoryEnum), nullable=False, server_default="national"
+    __table_args__ = (UniqueConstraint("cpf", name="unique_code_idx"),)
+
+    code = Column(String(20), nullable=False)
+    status = Column(
+        Enum(ModelProducersStatusEnum), nullable=False, server_default="active"
     )
 
 
