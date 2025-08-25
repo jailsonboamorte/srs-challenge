@@ -11,16 +11,18 @@ class FarmsModel(Model):
 
     def save(self: "FarmsModel", data: dict) -> Farms | None:
         try:
-            object = self.id(Farms, data.get("id"))
+            object = self.get(Farms, data.get("id"))
             if object is None:
                 object = Farms(
                     address_id=data.get("address_id"),
+                    name=data.get("name"),
                     total_area=data.get("total_area"),
                     arable_area=data.get("arable_area"),
                     vegetation_area=data.get("vegetation_area"),
                 )
             else:
                 object.address_id = data.get("address_id")
+                object.name = data.get("name")
                 object.total_area = data.get("total_area")
                 object.arable_area = data.get("arable_area")
                 object.vegetation_area = data.get("vegetation_area")

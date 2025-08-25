@@ -11,7 +11,7 @@ class AddressesModel(Model):
 
     def save(self: "AddressesModel", data: dict) -> Addresses | None:
         try:
-            object = self.id(Addresses, data.get("id"))
+            object = self.get(Addresses, data.get("id"))
             if object is None:
                 object = Addresses(
                     state=data.get("state"),

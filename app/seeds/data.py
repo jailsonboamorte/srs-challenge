@@ -54,13 +54,13 @@ def get_farms_data() -> dict:
     return {
         "adddress_id": None,
         "name": fake.name(),
-        "area_total": vegetation_area + arable_area,
+        "total_area": vegetation_area + arable_area,
         "vegetation_area": vegetation_area,
         "arable_area": arable_area,
     }
 
 
-def get_address_data() -> dict:
+def get_addresses_data() -> dict:
     return {
         "city": fake.city(),
         "state": fake.estado_nome(),

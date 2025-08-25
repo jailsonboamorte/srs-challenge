@@ -11,7 +11,7 @@ class CropsModel(Model):
 
     def save(self: "CropsModel", data: dict) -> Crops | None:
         try:
-            object = self.id(Crops, data.get("id"))
+            object = self.get(Crops, data.get("id"))
             if object is None:
                 object = Crops(
                     farm_id=data.get("farm_id"),

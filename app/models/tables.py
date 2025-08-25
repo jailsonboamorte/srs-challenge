@@ -101,7 +101,7 @@ class Farms(Base):
     address_id = Column(Integer, ForeignKey("addresses.id"), nullable=False)
     name = Column(String(150), nullable=False)
     total_area = Column(Integer, nullable=False, comment="Área total da fazenda")
-    arabel_area = Column(Integer, nullable=False, comment="Área agricultável")
+    arable_area = Column(Integer, nullable=False, comment="Área agricultável")
     vegetation_area = Column(Integer, nullable=False, comment="Área de vegetação")
 
 
@@ -125,7 +125,7 @@ class Crops(Base):
 
     farm_id = Column(Integer, ForeignKey("farms.id"), nullable=False)
     harvest_id = Column(Integer, ForeignKey("harvests.id"), nullable=False)
-    arabel_area = Column(Integer, nullable=False, comment="Área agricultável")
+    arable_area = Column(Integer, nullable=False, comment="Área agricultável")
     status = Column(Enum(ModelCropsStatusEnum), nullable=False)
 
 
