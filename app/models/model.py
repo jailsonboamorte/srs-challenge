@@ -9,8 +9,6 @@ db = DB.create()
 
 
 class Model:
-    session = None
-
     def __init__(self, session: Session = None) -> None:
         if session:
             self.session = session

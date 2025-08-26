@@ -3,18 +3,19 @@ from models.tables import People
 from sqlalchemy.orm import Session  # type: ignore
 from log import logger
 from helpers.exception import get_last_call
+from helpers.validation import validate_cpf
 
 
 class PeopleModel(Model):
     def __init__(self, session: Session = None):
         super().__init__(session)
 
-    def _validate_cpf(self: "PeopleModel", cpf: dict):
-        pass
-
     def save(self: "PeopleModel", data: dict) -> People | None:
         try:
             object = self.get_by_producer_id(People, data.get("producer_id"))
+            if validate_cpf(data.get("cpf")) is False:
+                return None
+
             if object is None:
                 object = People(
                     producer_id=data.get("producer_id"),
@@ -24,7 +25,6 @@ class PeopleModel(Model):
             else:
                 object.cpf = data.get("cpf")
                 object.name = data.get("name")
-
             self.session.add(object)
             self.session.flush()
 
