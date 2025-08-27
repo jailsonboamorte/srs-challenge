@@ -11,6 +11,9 @@ class FarmsModel(Model):
 
     def save(self: "FarmsModel", data: dict) -> Farms | None:
         try:
+            if data.get("vegetation_area") > data.get("total_area"):
+                return None
+
             object = self.get(Farms, data.get("id"))
             if object is None:
                 object = Farms(

@@ -45,7 +45,7 @@ def get_crops_data() -> dict:
 
 
 def get_farms_data() -> dict:
-    _arable_area = {100, 200, 500, 750, 1000}
+    _arable_area = {1000, 2000, 5000, 7500, 10000}
     arable_area = random.choice(list(_arable_area))
 
     _vegetation_area = {100, 200, 500, 750, 1000}
