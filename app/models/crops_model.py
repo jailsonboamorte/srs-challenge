@@ -23,12 +23,13 @@ class CropsModel(Model):
         area_occuped = self._get_area_occuped(farm_id)
         farm = self.session.get(Farms, farm_id)
         logger.warning(
-            "farm.total_area: %s area_occuped: %s desired_area: %s ",
+            "farm.total_area: %s vegetation_area: %s  area_occuped: %s desired_area: %s",
             farm.total_area,
+            farm.vegetation_area,
             area_occuped,
             desired_area,
         )
-        return farm.total_area >= (area_occuped + desired_area)
+        return (farm.total_area - farm.vegetation_area) >= (area_occuped + desired_area)
 
     def save(self: "CropsModel", data: dict) -> Crops | None:
         try:
