@@ -3,6 +3,7 @@ from models.tables import Companies
 from sqlalchemy.orm import Session  # type: ignore
 from log import logger
 from helpers.exception import get_last_call
+from helpers.validation import validate_cnpj
 
 
 class CompaniesModel(Model):
@@ -14,6 +15,9 @@ class CompaniesModel(Model):
 
     def save(self: "CompaniesModel", data: dict) -> Companies | None:
         try:
+            if not validate_cnpj(data.get("cnpj")):
+                return None
+
             object = self.get_by_producer_id(Companies, data.get("producer_id"))
             if object is None:
                 object = Companies(

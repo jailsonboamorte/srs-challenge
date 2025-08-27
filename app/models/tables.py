@@ -126,7 +126,7 @@ class Crops(Base):
     farm_id = Column(Integer, ForeignKey("farms.id"), nullable=False)
     harvest_id = Column(Integer, ForeignKey("harvests.id"), nullable=False)
     arable_area = Column(Integer, nullable=False, comment="Área agricultável")
-    status = Column(Enum(ModelCropsStatusEnum), nullable=False)
+    status = Column(Enum(ModelCropsStatusEnum), nullable=False, default="started")
 
 
 # op.execute('DROP TYPE IF EXISTS modelcategoryenum;')
