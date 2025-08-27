@@ -119,9 +119,6 @@ class FarmsProducers(Base):
 
 class Crops(Base):
     __tablename__ = "crops"
-    __table_args__ = (
-        UniqueConstraint("farm_id", "harvest_id", name="unique_farm_id_harvest_id_idx"),
-    )
 
     farm_id = Column(Integer, ForeignKey("farms.id"), nullable=False)
     harvest_id = Column(Integer, ForeignKey("harvests.id"), nullable=False)

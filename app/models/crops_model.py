@@ -40,6 +40,7 @@ class CropsModel(Model):
                 return None
 
             object = self.get(Crops, data.get("id"))
+            logger.warning(object)
             if object is None:
                 object = Crops(
                     farm_id=data.get("farm_id"),

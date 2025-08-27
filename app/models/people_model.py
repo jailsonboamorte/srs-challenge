@@ -12,10 +12,11 @@ class PeopleModel(Model):
 
     def save(self: "PeopleModel", data: dict) -> People | None:
         try:
-            object = self.get_by_producer_id(People, data.get("producer_id"))
             if validate_cpf(data.get("cpf")) is False:
+                logger.warning("CPF Invalid")
                 return None
 
+            object = self.get_by_producer_id(People, data.get("producer_id"))
             if object is None:
                 object = People(
                     producer_id=data.get("producer_id"),
@@ -25,6 +26,7 @@ class PeopleModel(Model):
             else:
                 object.cpf = data.get("cpf")
                 object.name = data.get("name")
+
             self.session.add(object)
             self.session.flush()
 

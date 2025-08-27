@@ -12,7 +12,7 @@ def get_producers_data() -> dict:
 def get_people_data() -> dict:
     return {
         "producer_id": None,
-        "name": fake.name(),
+        "name": fake.company(),
         "cpf": fake.ssn(),
     }
 
@@ -53,7 +53,7 @@ def get_farms_data() -> dict:
 
     return {
         "adddress_id": None,
-        "name": fake.name(),
+        "name": fake.company(),
         "total_area": vegetation_area + arable_area,
         "vegetation_area": vegetation_area,
         "arable_area": arable_area,

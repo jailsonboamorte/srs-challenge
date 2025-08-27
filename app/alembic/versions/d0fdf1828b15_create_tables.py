@@ -105,8 +105,7 @@ def upgrade() -> None:
     sa.Column('updated_at', sa.TIMESTAMP(), nullable=True),
     sa.ForeignKeyConstraint(['farm_id'], ['farms.id'], ),
     sa.ForeignKeyConstraint(['harvest_id'], ['harvests.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('farm_id', 'harvest_id', name='unique_farm_id_harvest_id_idx')
+    sa.PrimaryKeyConstraint('id')    
     )
     op.create_table('farms_producers',
     sa.Column('id', sa.Integer(), nullable=False),
