@@ -1,0 +1,42 @@
+# Projeto
+Desafio-SRS
+
+
+## Arquitetura
+![Arquitetura](assets/architecture.png)
+
+## Modelagem Relacional
+![DER](assets/DER.png)
+
+## Como funciona
+- Crie um arquivo `.env` com base no arquivo `.env-sample`, preenche os valore que faltam.
+- Iniciar o projeto `make up && make run`
+    - Acesse http://localhost:8088/docs para ver a documentação da API
+    - Abra um novo terminal no mesmo diretório para executar os demais comandos
+- Criar registros básicos `make basics`
+- Criar dados iniciais `make seeds`
+- Executar testes `make test`
+- Inicialziar Terraform `make tf-init`
+- Planejar recursos `make tf-plan`
+- Criar recursos `make tf-apply`
+- Destruir recursos `make tf-tf-destroy`
+
+## Queries
+Total de fazendas cadastradas (quantidade).
+```sql
+```
+Total de hectares registrados (área total).
+```sql
+```
+
+Por estado.
+```sql
+```
+Por cultura plantada.
+```sql
+```
+Por uso do solo (área agricultável e vegetação).```sql
+```
+## TO DO
+- CI/CD
+- ETL
