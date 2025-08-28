@@ -38,5 +38,6 @@ Por cultura plantada.
 Por uso do solo (área agricultável e vegetação).```sql
 ```
 ## TO DO
+- Autenticação
 - CI/CD
 - ETL
