@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from constants import ENV
+from routers.v1 import producers_router
 
 api = FastAPI(root_path=f"/{ENV}")
 
@@ -11,6 +12,7 @@ api.add_middleware(
 
 # /V1
 v1 = "/v1"
+api.include_router(producers_router.router, prefix=v1)
 
 
 @api.get("/")

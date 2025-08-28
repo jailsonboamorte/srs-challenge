@@ -19,16 +19,7 @@ class ProducersController:
             data["id"] = id
             producer = producers_model.save(data)
             producers_model.session.commit()
-
-            if (
-                self.save_store_content(
-                    self.bucket_name,
-                    self.path_name,
-                    producer.id,
-                    data.get("producer"),
-                )
-            ) is True:
-                return producer
+            return producer
 
         except Exception as e:
             producers_model.session.rollback()
@@ -65,9 +56,11 @@ class ProducersController:
             if isinstance(producer, Producers):
                 if self._save_data(data, producer.id, session):
                     producers_model.session.commit()
+                    logger.warning("AQUI")
                     return producer
         except Exception as e:
             producers_model.session.rollback()
+            logger.warning("AQUI")
             logger.error(
                 "Fail on {}.{}: ({})".format(
                     self.__class__.__name__, get_last_call(), e
@@ -75,43 +68,35 @@ class ProducersController:
             )
         return None
 
-    def sanitizer(self, producers: ProducersModel) -> dict:
+    def sanitizer(self, producers: Producers) -> dict:
         if producers is None:
             return {}
 
         id = producers.__dict__.get("id")
         code = producers.__dict__.get("code")
         status = producers.__dict__.get("status")
+        model = ProducersModel()
+        people = model.get_by_producer_id(People, id)
+        data = {"id": id, "code": code, "status": status.value}
 
-        people = producers.get_by_producer_id(People, id)
         if people is not None:
-            data = people.__dict__
-            person = {"name": data.get("name"), "cpf": data.get("cpf")}
+            _data = people.__dict__
+            data["person"] = {"name": _data.get("name"), "cpf": _data.get("cpf")}
 
-        company = producers.get_by_producer_id(Companies, id)
-        if company is not None:
-            data = company.__dict__
-            person = {
-                "fantasy_name": data.get("fantasy_name"),
-                "cnpj": data.get("cnpj"),
+        companies = model.get_by_producer_id(Companies, id)
+        if companies is not None:
+            _data = companies.__dict__
+            data["company"] = {
+                "fantasy_name": _data.get("fantasy_name"),
+                "cnpj": _data.get("cnpj"),
             }
-
-        data = {
-            "id": id,
-            "code": code,
-            "status": status,
-            "company": company,
-            "person": person,
-        }
 
         return data
 
     def get(self, id: int) -> ProducersModel | None:
         try:
             model = ProducersModel()
-            producers = self.sanitizer(model.get(Producers, id))
-            if producers:
-                return producers
+            return self.sanitizer(model.get(Producers, id))
         except Exception as e:
             logger.error(
                 "Fail on {}.{}: ({})".format(
