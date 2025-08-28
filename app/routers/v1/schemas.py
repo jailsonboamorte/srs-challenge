@@ -82,9 +82,14 @@ class PayloadResponseFarms(BaseModel):
     address: PayloadAddress
 
 
+class PayloadSaveCrops(BaseModel):
+    harvest_id: int
+    arable_area: int
+
+
 class PayloadResponseCrops(BaseModel):
     id: int
     farm_id: int
     arable_area: int
-    address: PayloadAddress
     harvest: PayloadHarvests
+    status: str

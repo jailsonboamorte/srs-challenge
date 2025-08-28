@@ -63,3 +63,14 @@ save_farm_example = {
         "description": "",
     }
 }
+
+save_crop_payload = copy.deepcopy(payload_crops)
+save_crop_payload["harvest_id"] = 1
+
+save_crop_example = {
+    "crop": {
+        "value": save_crop_payload,
+        "summary": "",
+        "description": "",
+    }
+}
