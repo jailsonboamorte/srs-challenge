@@ -32,6 +32,35 @@ class FarmsController:
             )
         return None
 
-    def sanitizer(self, farms: FarmsModel) -> dict:
+    def sanitizer(self, farms: Farms) -> dict:
         if farms is None:
             return {}
+
+        model = FarmsModel()
+        address = model.get(Addresses, farms.__dict__.get("address_id"))
+
+        data = {
+            "id": farms.__dict__.get("id"),
+            "name": farms.__dict__.get("name"),
+            "total_area": farms.__dict__.get("total_area"),
+            "arable_area": farms.__dict__.get("arable_area"),
+            "vegetation_area": farms.__dict__.get("vegetation_area"),
+            "address": {
+                "state": address.__dict__.get("state"),
+                "city": address.__dict__.get("city"),
+                "zip_code": address.__dict__.get("zip_code"),
+            },
+        }
+        return data
+
+    def get(self, id: int) -> FarmsModel | None:
+        try:
+            model = FarmsModel()
+            return self.sanitizer(model.get(Farms, id))
+        except Exception as e:
+            logger.error(
+                "Fail on {}.{}: ({})".format(
+                    self.__class__.__name__, get_last_call(), e
+                )
+            )
+            return None

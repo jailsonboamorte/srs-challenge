@@ -57,7 +57,7 @@ async def save(
 
 
 @router.put("/{id}")
-async def password(
+async def update(
     id: str,
     body: Annotated[
         PayloadUpdateProducer, Body(openapi_examples=update_producer_example)

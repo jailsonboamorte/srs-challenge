@@ -56,11 +56,9 @@ class ProducersController:
             if isinstance(producer, Producers):
                 if self._save_data(data, producer.id, session):
                     producers_model.session.commit()
-                    logger.warning("AQUI")
                     return producer
         except Exception as e:
             producers_model.session.rollback()
-            logger.warning("AQUI")
             logger.error(
                 "Fail on {}.{}: ({})".format(
                     self.__class__.__name__, get_last_call(), e

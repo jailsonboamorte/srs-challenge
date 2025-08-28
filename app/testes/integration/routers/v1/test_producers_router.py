@@ -5,11 +5,6 @@ from log import logger
 
 fake = Faker("pt_BR")
 
-path = "users"
-
-
-payload_companies = get_companies_data()
-
 
 def test_save_people_producer_expected_code_200(client_headers):
     payload = get_producers_data()

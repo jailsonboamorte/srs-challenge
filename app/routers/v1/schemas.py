@@ -14,6 +14,23 @@ class PayloadCompany(BaseModel):
     cnpj: str
 
 
+class PayloadAddress(BaseModel):
+    state: str
+    city: str
+    zip_code: str
+
+
+class PayloadHarvests(BaseModel):
+    id: int
+    name: str
+
+
+class PayloadCrops(BaseModel):
+    name: str
+    harvest_id: int
+    arable_area: int
+
+
 class PayloadSaveProducer(BaseModel):
     code: str
     type: str
@@ -46,3 +63,28 @@ class PayloadResponseProducer(BaseModel):
     status: str
     person: Annotated[Optional[PayloadPerson], Body(embed=True)] = None
     company: Annotated[Optional[PayloadCompany], Body(embed=True)] = None
+
+
+class PayloadSaveFarms(BaseModel):
+    name: str
+    total_area: int
+    arable_area: int
+    vegetation_area: int
+    address: PayloadAddress
+
+
+class PayloadResponseFarms(BaseModel):
+    id: int
+    name: str
+    total_area: int
+    arable_area: int
+    vegetation_area: int
+    address: PayloadAddress
+
+
+class PayloadResponseCrops(BaseModel):
+    id: int
+    farm_id: int
+    arable_area: int
+    address: PayloadAddress
+    harvest: PayloadHarvests
