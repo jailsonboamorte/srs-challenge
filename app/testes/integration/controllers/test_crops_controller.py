@@ -29,7 +29,6 @@ def test_save_farm_controller_data_expected_Crops_object():
     data = get_crops_data()
     data["farm_id"] = farm.id
     data["harvest_id"] = 1
-    logger.warning(data)
     ctrl = CropsController()
     ctrl.save(data)
 

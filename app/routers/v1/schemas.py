@@ -29,6 +29,7 @@ class PayloadCrops(BaseModel):
     name: str
     harvest_id: int
     arable_area: int
+    plant_name: str
 
 
 class PayloadSaveProducer(BaseModel):
@@ -85,6 +86,7 @@ class PayloadResponseFarms(BaseModel):
 class PayloadSaveCrops(BaseModel):
     harvest_id: int
     arable_area: int
+    plant_name: str
 
 
 class PayloadResponseCrops(BaseModel):

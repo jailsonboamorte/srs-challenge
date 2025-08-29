@@ -18,16 +18,15 @@ def test_save_crop_expected_code_200(client_headers):
     payload["type"] = "PF"
 
     response = client_headers.post("/v1/producers/", json=payload)
+    producer_id = response.json()["id"]
 
     payload = get_farms_data()
     payload["address"] = get_addresses_data()
-    producer_id = response.json()["id"]
     response = client_headers.post(f"/v1/farms/{producer_id}", json=payload)
+    farm_id = response.json()["id"]
 
     payload = get_crops_data()
-    del payload["farm_id"]
     payload["harvest_id"] = 2
-    farm_id = response.json()["id"]
     response = client_headers.post(f"/v1/crops/{farm_id}", json=payload)
 
     assert response.status_code == 200
@@ -52,6 +51,5 @@ def test_save_crop_expected_code_404(client_headers):
     payload["harvest_id"] = 2
     payload["arable_area"] = total_area
     response = client_headers.post(f"/v1/crops/{farm_id}", json=payload)
-    logger.warning(response.text)
 
     assert response.status_code == 404

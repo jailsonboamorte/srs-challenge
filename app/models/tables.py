@@ -122,6 +122,7 @@ class Crops(Base):
 
     farm_id = Column(Integer, ForeignKey("farms.id"), nullable=False)
     harvest_id = Column(Integer, ForeignKey("harvests.id"), nullable=False)
+    plant_name = Column(String(50), nullable=False)
     arable_area = Column(Integer, nullable=False, comment="Área agricultável")
     status = Column(Enum(ModelCropsStatusEnum), nullable=False, default="started")
 

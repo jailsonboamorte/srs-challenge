@@ -43,7 +43,6 @@ async def save(
     if user is None:
         raise HTTPException(status_code=404, detail="Crop not save")
     crop = crops_ctrl.get(user.id)
-    logger.warning(crop)
     return crop
 
 

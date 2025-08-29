@@ -14,8 +14,6 @@ def test_save_invalid_cpf_expected_None():
 
     producer = producer_model.save(producers_data)
 
-    logger.warning(producer.id)
-
     people_model = PeopleModel(session)
 
     people_data = get_people_data()
@@ -35,8 +33,6 @@ def test_save_valid_cpf_expected_People_object():
     session = producer_model.session
 
     producer = producer_model.save(producers_data)
-
-    logger.warning(producer.id)
 
     people_model = PeopleModel(session)
 

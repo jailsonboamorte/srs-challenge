@@ -40,19 +40,20 @@ class CropsModel(Model):
                 return None
 
             object = self.get(Crops, data.get("id"))
-            logger.warning(object)
             if object is None:
                 object = Crops(
                     farm_id=data.get("farm_id"),
                     harvest_id=data.get("harvest_id"),
                     arable_area=data.get("arable_area"),
                     status=data.get("status"),
+                    plant_name=data.get("plant_name"),
                 )
             else:
                 object.farm_id = data.get("farm_id")
                 object.harvest_id = data.get("harvest_id")
                 object.arable_area = data.get("arable_area")
                 object.status = data.get("status")
+                object.plant_name = data.get("plant_name")
 
             self.session.add(object)
             self.session.flush()

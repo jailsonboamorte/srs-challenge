@@ -38,6 +38,5 @@ def test_save_farm_expected_code_404(client_headers):
     payload["address"] = get_addresses_data()
     producer_id = response.json()["id"]
     response = client_headers.post(f"/v1/farms/{producer_id}", json=payload)
-    logger.warning(response.text)
 
     assert response.status_code == 404

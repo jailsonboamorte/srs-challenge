@@ -43,7 +43,6 @@ async def save(
     if user is None:
         raise HTTPException(status_code=404, detail="Farm not save")
     farm = farms_ctrl.get(user.id)
-    logger.warning(farm)
     return farm
 
 

@@ -7,7 +7,6 @@ from helpers.exception import get_last_call
 class CropsController:
     def save(self: "CropsController", data: dict) -> Crops | None:
         crops_model = CropsModel()
-        logger.warning(data)
         try:
             crop = crops_model.save(data)
             if isinstance(crop, Crops):

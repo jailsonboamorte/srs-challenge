@@ -29,13 +29,14 @@ def get_crops_data() -> dict:
     _plant_name = {"café", "milho", "feijão", "arroz", "ervilha", "grão de bico"}
     plant_name = random.choice(list(_plant_name))
 
-    _status = {"canceled", "finished", "started"}
-    status = random.choice(list(_status))
-
     _arable_area = {100, 200, 500, 750, 1000}
     arable_area = random.choice(list(_arable_area))
 
-    return {"farm_id": None, "harvest_id": None, "arable_area": arable_area}
+    return {
+        "harvest_id": None,
+        "arable_area": arable_area,
+        "plant_name": plant_name,
+    }
 
 
 def get_farms_data() -> dict:

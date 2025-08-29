@@ -99,6 +99,7 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('farm_id', sa.Integer(), nullable=False),
     sa.Column('harvest_id', sa.Integer(), nullable=False),
+    sa.Column('plant_name', sa.String(length=50), nullable=False),    
     sa.Column('arable_area', sa.Integer(), nullable=False, comment='Área agricultável'),
     sa.Column('status', sa.Enum('canceled', 'finished', 'started', name='modelcropsstatusenum'), nullable=False, server_default='started'),
     sa.Column('created_at', sa.TIMESTAMP(), server_default=sa.text('now()'), nullable=False),
