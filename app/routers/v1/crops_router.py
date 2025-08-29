@@ -6,7 +6,6 @@ from fastapi import Body, APIRouter, HTTPException
 from controllers.crops_controller import CropsController
 from routers.v1.payload_examples import save_crop_example
 from routers.v1.schemas import PayloadResponseCrops, PayloadSaveCrops
-from log import logger
 
 
 router = APIRouter()

@@ -3,7 +3,6 @@ from models.farms_model import FarmsModel
 from models.crops_model import CropsModel
 from models.tables import Crops
 from seeds.data import get_addresses_data, get_farms_data, get_crops_data
-from log import logger
 
 
 def test_save_available_arable_area_expected_Crops_object():

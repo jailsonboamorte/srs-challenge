@@ -10,7 +10,6 @@ from routers.v1.schemas import (
     PayloadSaveProducer,
     PayloadUpdateProducer,
 )
-from log import logger
 
 
 router = APIRouter()

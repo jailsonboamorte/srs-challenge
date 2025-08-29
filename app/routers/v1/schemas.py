@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional
-from typing import Annotated, Optional, Union
-from fastapi import FastAPI, Body
+from typing import Annotated
+from fastapi import Body
 
 
 class PayloadPerson(BaseModel):

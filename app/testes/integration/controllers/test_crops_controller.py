@@ -9,7 +9,6 @@ from seeds.data import (
     get_people_data,
     get_producers_data,
 )
-from log import logger
 
 
 def test_save_farm_controller_data_expected_Crops_object():

@@ -6,7 +6,6 @@ from fastapi import Body, APIRouter, HTTPException
 from controllers.farms_controller import FarmsController
 from routers.v1.payload_examples import save_farm_example
 from routers.v1.schemas import PayloadResponseFarms, PayloadSaveFarms
-from log import logger
 
 
 router = APIRouter()

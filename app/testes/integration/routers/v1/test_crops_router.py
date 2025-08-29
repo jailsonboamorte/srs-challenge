@@ -1,5 +1,4 @@
 from faker import Faker
-from pytest_schema import exact_schema
 from seeds.data import (
     get_producers_data,
     get_people_data,
@@ -7,7 +6,6 @@ from seeds.data import (
     get_farms_data,
     get_crops_data,
 )
-from log import logger
 
 fake = Faker("pt_BR")
 

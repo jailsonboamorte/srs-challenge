@@ -3,7 +3,6 @@ from models.people_model import PeopleModel
 from models.producers_model import ProducersModel
 from models.tables import People, Companies
 from seeds.data import get_people_data, get_producers_data, get_companies_data
-from log import logger
 
 
 def test_save_invalid_cpf_expected_None():

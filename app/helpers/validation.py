@@ -1,4 +1,3 @@
-from log import logger
 
 
 def validate_cpf(cpf: dict) -> bool:
