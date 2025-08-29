@@ -88,12 +88,15 @@ def get_initial_crops_data(farms: list[dict]) -> list:
     return data
 
 
-producers = get_initial_get_producers_data(10)
-people = get_initial_people_data(producers[:6])
-companies = get_initial_companies_data(producers[6:])
-addresses = get_initial_addresses_data(20)
+qty = 500
+half = int(qty / 2) + 1
+
+producers = get_initial_get_producers_data(qty)
+people = get_initial_people_data(producers[:half])
+companies = get_initial_companies_data(producers[half:])
+addresses = get_initial_addresses_data(2 * qty)
 addresses_producers = get_initial_addresses_producers_data(producers)
-farms = get_initial_farms_data(addresses[:10])
+farms = get_initial_farms_data(addresses[:qty])
 farms_producers = get_initial_farms_producers_data(farms)
 crops = get_initial_crops_data(farms)
 
