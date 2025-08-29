@@ -6,12 +6,17 @@ COPY --from=root ./pyproject.toml .
 ENV PYTHONPATH=/app
 ENV PYTHONDONTWRITEBYTECODE=1
 
+#dnf install -y postgresql-devel && \
+#dnf install -y curl && \
 # PYTHON ENV
-RUN apt-get update && apt-get install -y --no-install-recommends libpq-dev gcc curl && rm -rf /var/lib/apt/lists/*
-RUN pip install --upgrade pip==24.2 --no-cache-dir
+RUN dnf -y update && \
+    dnf install -y gcc postgresql-devel && \
+    dnf clean all
+
+    RUN pip install --upgrade pip==24.2 --no-cache-dir
 RUN pip3 install poetry==1.8.3 --no-cache-dir
 RUN poetry config virtualenvs.create false
-RUN poetry install--no-dev --no-interaction --no-ansi
+RUN poetry install --no-interaction --no-ansi
 
 COPY --from=root ./app ${LAMBDA_TASK_ROOT}
 

@@ -60,7 +60,7 @@ endef
 
 # -var="force_image_rebuild=true"
 define tf_vars
-	-var="force_image_rebuild=false" -var="DEPLOY_IMG_TAG=$(TAG)" -var="AWS_ACCOUNT=${AWS_ACCOUNT}" -var="PROJECT_NAME=${PROJECT_NAME}" -var="AWS_REGION=${AWS_REGION}" -var="ENV=dev" 
+	-var="force_image_rebuild=true" -var="DEPLOY_IMG_TAG=$(TAG)" -var="AWS_ACCOUNT=${AWS_ACCOUNT}" -var="PROJECT_NAME=${PROJECT_NAME}" -var="AWS_REGION=${AWS_REGION}" -var="ENV=dev" 
 endef
 
 tf-init:
@@ -74,3 +74,9 @@ tf-apply:
 
 tf-destroy:
 	@terraform ${tfdir} destroy ${tf_vars}
+
+
+local-build:
+	docker build -f ${DOCKER_PATH}/Dockerfile --build-context root=. --platform linux/amd64 -t docker-image:test .
+local-run:
+	docker run --rm --name ${APP_CONTAINER_NAME} --platform linux/amd64 -m 2048m -p 9000:8080 --env-file ".env" docker-image:test
